@@ -63,8 +63,6 @@ public class RobotContainer {
     private  SendableChooser<Command> autoChooser;
     //private final Music THEMUSIC = new Music();
     private final Superstructure superstructure = new Superstructure();
-    
-    private final Blinkin blinky = new Blinkin();
 
     private final SwerveSubsystem s_Swerve = new SwerveSubsystem(new File(Filesystem.getDeployDirectory(), "swerve/falcon"));
     // Limelights
@@ -84,8 +82,8 @@ public class RobotContainer {
         s_Swerve.setDefaultCommand(
                 new TeleopDrive(
                         s_Swerve,
-                        () -> -driver.getRawAxis(translationAxis),
-                        () -> -driver.getRawAxis(strafeAxis),
+                        () -> -driver.getRawAxis(translationAxis)*0.3,
+                        () -> -driver.getRawAxis(strafeAxis)*0.3,
                         () -> -driver.getRawAxis(rotationAxis),
                         () -> !robotCentric.getAsBoolean()));
 

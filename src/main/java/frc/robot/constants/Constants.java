@@ -4,7 +4,7 @@ import frc.robot.common.CanPort;
 
 public final class Constants {
     
-    public static final String CANIVORE_NAME = "1764 canivore";
+    //public static final String CANIVORE_NAME = "1764 canivore";
     public static final int PRESSURE_SENSOR_PORT =   0;
 
 
