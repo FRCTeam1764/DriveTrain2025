@@ -89,7 +89,7 @@ public class SwerveSubsystem extends SubsystemBase
     
     swerveDrive.setHeadingCorrection(false); // Heading correction should only be used while controlling the robot via angle.
     swerveDrive.setCosineCompensator(!SwerveDriveTelemetry.isSimulation); // Disables cosine compensation for simulations since it causes discrepancies not seen in real life.
-    swerveDrive.getGyro().setInverted(true);;
+    swerveDrive.getGyro().setInverted(false);;
  for(SwerveModule mod : swerveDrive.getModules()){
       TalonFX driveMotor = (TalonFX)mod.getDriveMotor().getMotor();
       TalonFX angleMotor = (TalonFX)mod.getAngleMotor().getMotor();

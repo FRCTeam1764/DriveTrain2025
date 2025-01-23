@@ -36,7 +36,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class RobotContainer {
     
     private final Joystick driver = new Joystick(0);
-    private final Joystick secondaryController = new Joystick(1); 
+    private final Joystick secondaryController = new Joystick(1);
+    
+    private final double maxspeed = 0.4;
 
     /* Drive Controls */
 
@@ -48,11 +50,6 @@ public class RobotContainer {
 
     private final JoystickButton zeroGyro = new JoystickButton(driver, XboxController.Button.kY.value);
     private final JoystickButton robotCentric = new JoystickButton(driver, XboxController.Button.kRightBumper.value);
-    private final JoystickAxis LeftTrigger = new JoystickAxis(driver, XboxController.Axis.kLeftTrigger.value);
-    private final JoystickButton FLIPURSELF = new JoystickButton(driver, XboxController.Button.kX.value);
-
-    private final JoystickButton SpeakerLimelight = new JoystickButton(driver, XboxController.Button.kA.value);
-    private final JoystickButton RingLimelight = new JoystickButton(driver, XboxController.Button.kB.value);
 
     /* CoPilot Buttons */
 
@@ -61,46 +58,32 @@ public class RobotContainer {
     public RobotState robotState = new RobotState(driver);
 
     private  SendableChooser<Command> autoChooser;
-    //private final Music THEMUSIC = new Music();
     private final Superstructure superstructure = new Superstructure();
 
     private final SwerveSubsystem s_Swerve = new SwerveSubsystem(new File(Filesystem.getDeployDirectory(), "swerve/falcon"));
-    // Limelights
-    // limelight 3 is front intake
-    // limelight 2 is back shooter
-    // 4,7,15,16,14,12,11,13,6,5 - april id tags that limelight 2 should see
-    private LimelightSubsystem limelight3 = new LimelightSubsystem("limelight-three", 1,s_Swerve);
-    private LimelightSubsystem limelight2 = new LimelightSubsystem("limelight-two",0,s_Swerve);
 
     private Trajectory[] trajectories;
 
     public RobotContainer() {
 
-        // teleop drive for yagsl
-    limelight3.setPipeline(1);
+    // teleop drive for yagsl
 
         s_Swerve.setDefaultCommand(
                 new TeleopDrive(
                         s_Swerve,
-                        () -> -driver.getRawAxis(translationAxis)*0.3,
-                        () -> -driver.getRawAxis(strafeAxis)*0.3,
+                        () -> -driver.getRawAxis(translationAxis),
+                        () -> -driver.getRawAxis(strafeAxis),
                         () -> -driver.getRawAxis(rotationAxis),
                         () -> !robotCentric.getAsBoolean()));
 
         configAutoCommands();
         configurePilotButtonBindings();
         configureCoPilotButtonBindings();
-
-        // autoChooser =  AutoBuilder.buildAutoChooser();
-        SmartDashboard.putData(autoChooser);
-        
     }
 
     private void configurePilotButtonBindings() {
         //y
         zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroGyro()));
-        //a
-        FLIPURSELF.whileTrue(new DoA180(s_Swerve, driver, true));
     }
 
     private void configureCoPilotButtonBindings() {
@@ -116,8 +99,8 @@ public class RobotContainer {
     }
 
     public SwerveSubsystem getDrivetrainSubsystem(){
-     return s_Swerve;
-     }
+        return s_Swerve;
+    }
     public double getPercentFromBattery(double speed){
         return speed * 12 / RobotController.getBatteryVoltage();
     }

@@ -9,9 +9,7 @@ import frc.robot.libraries.external.robot.UpdateManager;
 public class Robot extends TimedRobot {
     private static Robot instance = null;
     public RobotContainer robotContainer;
-    private UpdateManager updateManager = new UpdateManager(
-            // robotContainer.getDrivetrainSubsystem()
-    );
+    private UpdateManager updateManager = new UpdateManager();
 
    public Robot() {
        instance = this;
@@ -44,9 +42,7 @@ public class Robot extends TimedRobot {
    }
 
     @Override
-    public void disabledPeriodic() {
-        // robotContainer.getVisionSubsystem().setLedMode(Limelight.LedMode.OFF);
-    }
+    public void disabledPeriodic() {}
 
     @Override
     public void teleopInit() {
