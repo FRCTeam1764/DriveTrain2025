@@ -93,8 +93,8 @@ public class SwerveSubsystem extends SubsystemBase
  for(SwerveModule mod : swerveDrive.getModules()){
       TalonFX driveMotor = (TalonFX)mod.getDriveMotor().getMotor();
       TalonFX angleMotor = (TalonFX)mod.getAngleMotor().getMotor();
-
- }
+    
+    }
 
 // for(SwerveModule mod : swerveDrive.getModules()){
 //       TalonFX driveMotor = (TalonFX)mod.getDriveMotor().getMotor();
